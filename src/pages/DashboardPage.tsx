@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAnalyticsSummary } from "@/hooks/useAnalytics";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PageLoader } from "@/components/ui/loader";
 import { Users, Upload, BarChart3 } from "lucide-react";
 
 export function DashboardPage() {
@@ -17,6 +18,10 @@ export function DashboardPage() {
         <p className="text-sm text-destructive">Failed to load summary. You may need to re-login.</p>
       )}
 
+      {isLoading ? (
+        <PageLoader />
+      ) : (
+      <>
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -24,11 +29,7 @@ export function DashboardPage() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            {isLoading ? (
-              <p className="text-2xl font-bold text-muted-foreground">—</p>
-            ) : (
-              <p className="text-2xl font-bold">{summary?.total_farmers ?? 0}</p>
-            )}
+            <p className="text-2xl font-bold">{summary?.total_farmers ?? 0}</p>
           </CardContent>
         </Card>
         <Card>
@@ -36,11 +37,7 @@ export function DashboardPage() {
             <CardTitle className="text-sm font-medium">Activated %</CardTitle>
           </CardHeader>
           <CardContent>
-            {isLoading ? (
-              <p className="text-2xl font-bold text-muted-foreground">—</p>
-            ) : (
-              <p className="text-2xl font-bold">{summary?.activated_percent ?? 0}%</p>
-            )}
+            <p className="text-2xl font-bold">{summary?.activated_percent ?? 0}%</p>
           </CardContent>
         </Card>
         <Card>
@@ -48,11 +45,7 @@ export function DashboardPage() {
             <CardTitle className="text-sm font-medium">KYC completion %</CardTitle>
           </CardHeader>
           <CardContent>
-            {isLoading ? (
-              <p className="text-2xl font-bold text-muted-foreground">—</p>
-            ) : (
-              <p className="text-2xl font-bold">{summary?.kyc_completion_percent ?? 0}%</p>
-            )}
+            <p className="text-2xl font-bold">{summary?.kyc_completion_percent ?? 0}%</p>
           </CardContent>
         </Card>
       </div>
@@ -98,6 +91,8 @@ export function DashboardPage() {
           </Card>
         </Link>
       </div>
+      </>
+      )}
     </div>
   );
 }

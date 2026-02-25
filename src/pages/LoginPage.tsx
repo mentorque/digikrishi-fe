@@ -53,20 +53,24 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
+    <div
+      className="relative flex min-h-screen items-center justify-center bg-muted/30 p-4 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url(/login-screen-background.png)" }}
+    >
+      <div className="absolute inset-0 bg-background/70 backdrop-blur-[1px]" aria-hidden />
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-4 top-4"
+        className="absolute right-4 top-4 z-10"
         onClick={toggleTheme}
         aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       >
         {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
       </Button>
-      <Card className={cn("w-full max-w-md border-border bg-transparent shadow-none")}>
+      <Card className={cn("relative z-10 w-full max-w-md border-border bg-card/95 shadow-lg backdrop-blur-sm")}>
         <CardHeader className="space-y-1 text-center">
-          <img src="/digi-prishi-logo.webp" alt="Kheti Buddy" className="mx-auto h-36 w-auto rounded-2xl" />
-          <CardTitle className="text-2xl font-bold">Kheti Buddy</CardTitle>
+          <img src="/digi-prishi-logo.webp" alt="Digi" className="mx-auto h-36 w-auto rounded-2xl" />
+          <CardTitle className="text-2xl font-bold">Digi Krishi</CardTitle>
           <CardDescription>Sign in to your tenant account</CardDescription>
         </CardHeader>
         <CardContent>
@@ -92,6 +96,7 @@ export function LoginPage() {
               <Input
                 id="password"
                 type="password"
+                placeholder="••••••••"
                 autoComplete="current-password"
                 {...register("password")}
               />
@@ -99,8 +104,8 @@ export function LoginPage() {
                 <p className="text-sm text-destructive">{errors.password.message}</p>
               )}
             </div>
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Signing in…" : "Sign in"}
+            <Button type="submit" className="w-full" loading={isSubmitting}>
+              Sign in
             </Button>
           </form>
         </CardContent>

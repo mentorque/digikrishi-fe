@@ -4,6 +4,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { useAuth } from "@/contexts/AuthContext";
 import { RoleGuard } from "@/components/auth/RoleGuard";
 import { MainLayout } from "@/components/layout/MainLayout";
+import { PageLoader } from "@/components/ui/loader";
 import { LoginPage } from "@/pages/LoginPage";
 import { DashboardPage } from "@/pages/DashboardPage";
 import { FarmersPage } from "@/pages/FarmersPage";
@@ -13,6 +14,7 @@ import { CsvUploadPage } from "@/pages/CsvUploadPage";
 import { AnalyticsPage } from "@/pages/AnalyticsPage";
 import { UsersPage } from "@/pages/UsersPage";
 import { SettingsPage } from "@/pages/SettingsPage";
+import { Toaster } from "sonner";
 
 function AuthListener() {
   useEffect(() => {
@@ -54,7 +56,7 @@ function ProtectedRoutes() {
 function AuthLoading() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
-      <p className="text-muted-foreground">Loading…</p>
+      <PageLoader />
     </div>
   );
 }
@@ -68,6 +70,7 @@ export default function App() {
 
   return (
     <>
+      <Toaster position="top-right" richColors closeButton />
       <AuthListener />
       <Routes>
         <Route

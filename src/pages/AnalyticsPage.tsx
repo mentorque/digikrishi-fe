@@ -32,7 +32,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Loader2 } from "lucide-react";
+import { Loader } from "@/components/ui/loader";
 import type { AnalyticsByKey } from "@/types";
 
 type AnalyticsSection = "location" | "demographics" | "profile" | "time";
@@ -694,7 +694,7 @@ export function AnalyticsPage() {
 
       {isLoading && (
         <div className="flex items-center justify-center py-16 px-6 rounded-xl border-2 border-primary/40 bg-primary/5 shadow-md min-h-[200px]" aria-busy="true" aria-label="Loading analytics">
-          <Loader2 className="h-16 w-16 animate-spin text-primary stroke-[2.5]" aria-hidden />
+          <Loader className="scale-150" />
         </div>
       )}
     </div>

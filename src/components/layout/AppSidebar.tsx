@@ -44,7 +44,7 @@ export function AppSidebar() {
         sidebarOpen ? "w-56" : "w-16"
       )}
     >
-      <div className="flex h-14 items-center gap-2 border-b border-sidebar-border px-3">
+      <div className={cn("flex h-14 items-center border-b border-sidebar-border", sidebarOpen ? "gap-2 px-3" : "justify-center px-0")}>
         <Button
           variant="ghost"
           size="icon"
@@ -53,11 +53,13 @@ export function AppSidebar() {
         >
           <Menu className="h-5 w-5" />
         </Button>
-        <img src="/digi-prishi-logo.webp" alt="" className="h-12 w-12 shrink-0 rounded-xl object-contain" aria-hidden />
         {sidebarOpen && (
-          <span className="truncate font-semibold text-sidebar-foreground">
-            Kheti Buddy
-          </span>
+          <>
+            <img src="/digi-prishi-logo.webp" alt="" className="h-12 w-12 shrink-0 rounded-xl object-contain" aria-hidden />
+            <span className="truncate font-semibold text-sidebar-foreground">
+              Digi Krishi
+            </span>
+          </>
         )}
       </div>
       <nav className="flex-1 space-y-1 p-2">

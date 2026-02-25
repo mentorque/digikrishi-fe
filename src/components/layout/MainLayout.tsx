@@ -29,7 +29,7 @@ export function MainLayout() {
       <div className="flex flex-1 flex-col">
         <header className="flex h-14 items-center justify-between border-b border-border bg-background px-4">
           <h1 className="text-lg font-semibold text-foreground md:text-xl">
-            {user?.Tenant?.name ?? "Kheti Buddy"}
+            {user?.Tenant?.name ?? "Digi Krishi"}
           </h1>
           <div className="flex items-center gap-2">
             <Button
@@ -48,7 +48,7 @@ export function MainLayout() {
             </Button>
           </div>
         </header>
-        <main className="flex-1 overflow-auto p-4 md:p-6">
+        <main className="flex-1 p-4 md:p-6">
           <Outlet />
         </main>
       </div>

@@ -6,11 +6,17 @@ export interface CsvUploadResponse {
   jobId: string;
 }
 
+/** 1) Get presign URL 2) PUT file to S3 3) Register upload with backend. Returns jobId. */
 export async function uploadCsv(file: File): Promise<CsvUploadResponse> {
-  const formData = new FormData();
-  formData.append("file", file);
-  const { data } = await api.post<CsvUploadResponse>("/csv/upload", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
+  const { data: presign } = await api.post<{ uploadUrl: string; key: string }>("/csv/presign");
+  await fetch(presign.uploadUrl, {
+    method: "PUT",
+    body: file,
+    headers: { "Content-Type": "text/csv" },
+  });
+  const { data } = await api.post<CsvUploadResponse>("/csv/upload", {
+    key: presign.key,
+    fileName: file.name,
   });
   return data;
 }

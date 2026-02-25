@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { createFarmer } from "@/api/farmers";
 import type { Gender, KycStatus } from "@/types";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ import {
 import { ArrowLeft, FileDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getSampleFarmerData } from "@/constants/sampleFarmer";
+import { getErrorMessage } from "@/lib/utils";
 
 const farmerSchema = z.object({
   farmer_code: z.string().min(1, "Farmer code is required"),
@@ -53,8 +55,10 @@ export function FarmerNewPage() {
     mutationFn: createFarmer,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["farmers"] });
+      toast.success((data as { message?: string })?.message ?? "Farmer created");
       navigate(`/farmers/${data.id}`);
     },
+    onError: (err) => toast.error(getErrorMessage(err)),
   });
 
   const {
@@ -295,8 +299,8 @@ export function FarmerNewPage() {
           <Link to="/farmers">
             <Button type="button" variant="outline">Cancel</Button>
           </Link>
-          <Button type="submit" disabled={mutation.isPending}>
-            {mutation.isPending ? "Creating…" : "Create farmer"}
+          <Button type="submit" loading={mutation.isPending}>
+            Create farmer
           </Button>
         </div>
       </form>

@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { PageLoader } from "@/components/ui/loader";
 import { Plus, Search, ChevronLeft, ChevronRight } from "lucide-react";
 
 export function FarmersPage() {
@@ -76,7 +77,7 @@ export function FarmersPage() {
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <p className="py-8 text-center text-muted-foreground">Loading…</p>
+            <PageLoader />
           ) : farmers.length === 0 ? (
             <p className="py-8 text-center text-muted-foreground">No farmers found.</p>
           ) : (

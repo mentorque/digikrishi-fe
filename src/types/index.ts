@@ -52,8 +52,13 @@ export interface FarmerLand {
 export interface FarmerDoc {
   id?: string;
   farmer_id?: string;
-  pan_url?: string | null;
+  shg_byelaws_url?: string | null;
+  extract_7_12_url?: string | null;
+  consent_letter_url?: string | null;
   aadhaar_url?: string | null;
+  pan_url?: string | null;
+  bank_doc_url?: string | null;
+  other_doc_url?: string | null;
 }
 
 export interface Farmer {
